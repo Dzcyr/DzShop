@@ -15,3 +15,5 @@ use App\Http\Controllers\PagesController;
 */
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
+
+Auth::routes();
