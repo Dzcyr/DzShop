@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
-
+use App\Http\Controllers\UserAddressesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +17,8 @@ use App\Http\Controllers\PagesController;
 Route::get('/', [PagesController::class, 'index'])->name('index');
 
 Auth::routes(['verify' => true]);
+
+// auth 中间件代表需要登录，verified中间件代表需要经过邮箱验证
+Route::group(['middleware' => ['auth', 'verified']], function() {
+    Route::get('user_addresses', [UserAddressesController::class, 'index'])->name('user_addresses.index');
+});
