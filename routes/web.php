@@ -24,6 +24,10 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('user_addresses', [UserAddressesController::class, 'index'])->name('user_addresses.index');
     // 新建收货地址
     Route::get('user_addresses/create', [UserAddressesController::class, 'create'])->name('user_addresses.create');
-    // 保存收货地址
     Route::post('user_addresses', [UserAddressesController::class, 'store'])->name('user_addresses.store');
+    // 修改收货地址
+    Route::get('user_addresses/{user_address}', [UserAddressesController::class, 'edit'])->name('user_addresses.edit');
+    Route::put('user_addresses/{user_address}', [UserAddressesController::class, 'update'])->name('user_addresses.update');
+    // 删除收货地址
+    Route::delete('user_addresses/{user_address}', [UserAddressesController::class, 'destroy'])->name('user_addresses.destroy');
 });
