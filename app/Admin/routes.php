@@ -12,8 +12,12 @@ Route::group([
 ], function (Router $router) {
     // 首页
     $router->get('/', 'HomeController@index')->name('home');
-    // 用户列表
+    // 用户管理
     $router->get('users', 'UserController@index');
-    // 商品列表
+    // 商品管理
     $router->get('products', 'ProductsController@index');
+    $router->get('products/create', 'ProductsController@create');
+    $router->post('products', 'ProductsController@store');
+    $router->get('products/{id}/edit', 'ProductsController@edit');
+    $router->put('products/{id}', 'ProductsController@update');
 });
