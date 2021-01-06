@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['verify' => true]);
+// 首页
+Route::redirect('/', '/products')->name('root');
+// 商品管理
+Route::get('products', 'ProductsController@index')->name('products.index');
+Route::get('products', 'ProductsController@index')->name('products.index');
+Route::get('products/{product}', 'ProductsController@show')->name('products.show')->where(['product' => '[0-9]+']);;
 // auth 中间件代表需要登录，verified中间件代表需要经过邮箱验证
 Route::group(['middleware' => ['auth', 'verified']], function() {
     // 用户收货地址管理
@@ -28,9 +34,3 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
     Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
 });
-// 首页
-Route::redirect('/', '/products')->name('root');
-// 商品管理
-Route::get('products', 'ProductsController@index')->name('products.index');
-Route::get('products', 'ProductsController@index')->name('products.index');
-Route::get('products/{product}', 'ProductsController@show')->name('products.show');
