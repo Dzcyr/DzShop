@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class UserAddressRequest extends Rquest
+class UserAddressRequest extends Request
 {
     public function rules()
     {
