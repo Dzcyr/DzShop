@@ -53,3 +53,4 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 // 支付通知
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
 Route::post('payment/wechat/notify', 'PaymentController@wechatNotify')->name('payment.wechat.notify');
+Route::post('payment/wechat/refund_notify', 'PaymentController@wechatRefundNotify')->name('payment.wechat.refund_notify');
