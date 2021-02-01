@@ -9,7 +9,8 @@ use Illuminate\Auth\Events\Registered;
 use App\Listeners\UpdateProductSoldCount;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-
+use App\Events\OrderReviewed;
+use App\Listeners\UpdateProductRating;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -26,8 +27,11 @@ class EventServiceProvider extends ServiceProvider
             // 更新商品销量
             UpdateProductSoldCount::class,
             // 发送支付成功邮件
-            SendOrderPaidMail::class
-        ]
+            SendOrderPaidMail::class,
+        ],
+        OrderReviewed::class => [
+            UpdateProductRating::class,
+        ],
     ];
 
     /**
