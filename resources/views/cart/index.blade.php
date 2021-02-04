@@ -117,6 +117,7 @@
             });
         });
       });
+
       // 监听 全选/取消全选 单选框的变更事件
       $('#select-all').change(function () {
         var checked = $(this).prop('checked');
@@ -127,6 +128,7 @@
           $(this).prop('checked', checked);
         });
       });
+
       // 监听创建订单按钮的点击事件
       $('.btn-create-order').click(function () {
         // 构建请求参数，将用户选择的地址的 id 和备注内容写入请求参数
@@ -134,6 +136,7 @@
           address_id: $('#order-form').find('select[name=address]').val(),
           items: [],
           remark: $('#order-form').find('textarea[name=remark]').val(),
+          coupon_code: $('input[name=coupon_code]').val(),
         };
         // 遍历 <table> 标签内所有带有 data-id 属性的 <tr> 标签，也就是每一个购物车中的商品 SKU
         $('table tr[data-id]').each(function () {
@@ -178,6 +181,7 @@
             }
           });
       });
+
       // 检查按钮点击事件
       $('#btn-check-coupon').click(function () {
         // 获取用户输入的优惠码

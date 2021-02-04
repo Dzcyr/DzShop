@@ -33,6 +33,18 @@
       @endif
       <!-- 引入 csrf token 字段 -->
       {{ csrf_field() }}
+      <div class="form-group row">
+        <label class="col-form-label text-md-right col-sm-2">姓名</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="contact_name" value="{{ old('contact_name', $address->contact_name) }}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label text-md-right col-sm-2">电话</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="contact_phone" value="{{ old('contact_phone', $address->contact_phone) }}">
+        </div>
+      </div>
       <!-- 注意这里多了 @change -->
       <select-district :init-value="{{ json_encode([old('province', $address->province), old('city', $address->city), old('district', $address->district)]) }}" @change="onDistrictChanged" inline-template>
           <div class="form-group row">
@@ -73,18 +85,6 @@
           <label class="col-form-label text-md-right col-sm-2">邮编</label>
           <div class="col-sm-9">
             <input type="text" class="form-control" name="zip" value="{{ old('zip', $address->zip) }}">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label text-md-right col-sm-2">姓名</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="contact_name" value="{{ old('contact_name', $address->contact_name) }}">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label text-md-right col-sm-2">电话</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="contact_phone" value="{{ old('contact_phone', $address->contact_phone) }}">
           </div>
         </div>
         <div class="form-group row text-center">
