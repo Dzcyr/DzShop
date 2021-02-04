@@ -8,6 +8,7 @@ use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Exceptions\CouponCodeUnavailableException;
+use App\Models\User;
 
 class CouponCode extends Model
 {
@@ -68,7 +69,7 @@ class CouponCode extends Model
     }
 
     // 检查优惠卷是否可用
-    public function checkAvailable($orderAmount = null)
+    public function checkAvailable(User $user, $orderAmount = null)
     {
         if (!$this->enabled) {
             throw new CouponCodeUnavailableException('优惠券不存在');
@@ -88,6 +89,19 @@ class CouponCode extends Model
 
         if (!is_null($orderAmount) && $orderAmount < $this->min_amount) {
             throw new CouponCodeUnavailableException('订单金额不满足该优惠券最低金额');
+        }
+        // 判断是否有 未支付自动关闭 或者 支付后已经退款成功的订单
+        $used = Order::where('user_id', $user->id)
+            ->where('coupon_code_id', $this->id)
+            ->where(function($query) {
+                $query->where(function($query) {
+                    $query->whereNull('paid_at')->where('closed', false);
+                })->orWhere(function($query) {
+                    $query->whereNotNull('paid_at')->where('refund_status', '!=', Order::REFUND_STATUS_SUCCESS);
+                });
+            })->exists();
+        if($used) {
+            throw new CouponCodeUnavailableException('你已经使用过这张优惠卷了');
         }
     }
 
