@@ -16,7 +16,7 @@ class CouponCodesController extends AdminController
      *
      * @var string
      */
-    protected $title = 'CouponCode';
+    protected $title = '优惠卷';
 
     /**
      * Make a grid builder.

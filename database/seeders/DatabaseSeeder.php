@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CouponCode;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(AdminTablesSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(UserAddressesSeeder::class);
+        $this->call(ProductsSeeder::class);
+        $this->call(CouponCodesSeeder::class);
+        $this->call(OrdersSeeder::class);
     }
 }
